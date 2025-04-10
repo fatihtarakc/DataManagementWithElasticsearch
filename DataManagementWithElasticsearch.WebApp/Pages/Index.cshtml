@@ -1,0 +1,61 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Sözcü News";
+}
+
+<div class="container-xxl flex-grow1 container-p-y px-5">
+	<div class="row mb-5">
+		<div class="card h-100">
+			<div class="card-body" style="font-family:'Comic Sans MS'">
+				<a asp-area="" asp-page="/Index" style="text-decoration:none" title="News"><h1 class="card-title text-center py-5" style="color: indigo;">News</h1></a>
+
+				<hr />
+				<div class="row mb-5">
+					<form method="post" asp-action="/Index">
+						<input type="text" name="SearchQuery" placeholder="Content Search..." class="form-control col-8" />
+						<button type="submit" class="btn btn-primary mt-2 col-12">Search</button>
+					</form>
+				</div>
+				<br />
+
+				<!-- Basic Bootstrap Table -->
+				<div class="card mb-5">
+					<div class="table-responsive text-nowrap">
+						<table class="table mb-2 text-center">
+							<thead>
+								<br />
+								<tr>
+									<th style="font-size:16px; color: indigo;">#</th>
+									<th style="font-size:16px; color: indigo;">&nbsp;Id</th>
+									<th style="font-size:16px; color: indigo;">&nbsp;Content</th>
+									<th style="font-size:16px; color: indigo;">&nbsp;Image</th>
+								</tr>
+							</thead>
+							<tbody class="table-border-bottom-0 align-items-center">
+
+								@{
+									var count = 1;
+									foreach (var news in Model.NewsList)
+									{
+										<tr>
+											<td>@count</td>
+											<td>@news.Id</td>
+											<td><a href="@news.Link" target="_blank" title="@news.Content">@news.Content</a></td>
+											<td><img src="@news.Image" alt="@news.Image" height="50px" /></td>
+										</tr>
+
+										count++;
+									}
+								}
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--/ Basic Bootstrap Table -->
+
+			</div>
+		</div>
+	</div>
+</div>
